@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Licenciés{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>Les licenciés de la commune</h1>
+
+        {% for licencie in licencies %}
+
+        <div class="card" style="width: 18rem;">
+            <img src="{{ licencie.photoLicencie }}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{ licencie.nomLicencie }} {{ licencie.prenomLicencie }}</h5>
+              <p class="card-text">Né(e) le {{ licencie.dateNaissance ? licencie.dateNaissance|date('d-m-Y') : '' }}</p>
+              
+            </div>
+          </div>
+            
+        {% else %}
+            <p>Aucun licencié enregistré</p>
+            
+        {% endfor %}
+        
+
+    <a href="{{ path('app_licencie_new') }}">Create new</a>
+</div>
+{% endblock %}
