@@ -4,10 +4,11 @@
 
 {% block body %}
 <div class="container mt-4">
-    <h1>Créer un nouveau licencié</h1>
+    <h2>Créer un nouveau licencié</h2>
+    <div class="offset-md-3 col-md-6">
+        {{ include('licencie/_form.html.twig') }}
 
-    {{ include('licencie/_form.html.twig') }}
-
-    <a href="{{ path('app_licencie_index') }}">Retour à la liste</a>
+        <a href="{{ path('app_licencie_index') }}">Retour à la liste</a>
+    </div>
 </div>
 {% endblock %}

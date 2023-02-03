@@ -1,9 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Equipe{% endblock %}
+{% block title %}Equipes{% endblock %}
 
 {% block body %}
-    <h1>Equipe</h1>
+<div class="container m-4">
+    <h2>Equipe</h2>
 
     <table class="table">
         <tbody>
@@ -23,4 +24,5 @@
     <a href="{{ path('app_equipe_edit', {'id': equipe.id}) }}">edit</a>
 
     {{ include('equipe/_delete_form.html.twig') }}
+</div>
 {% endblock %}

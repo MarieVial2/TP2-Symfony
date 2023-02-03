@@ -8,8 +8,10 @@ use App\Entity\Licencie;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 
@@ -62,7 +64,24 @@ class LicencieType extends AbstractType
                     new Assert\NotBlank
                 ]
             ])
-            ->add('photoLicencie')
+            ->add('photoLicencie', FileType::class, [
+                'label' => 'Photo du licencié',
+                // En le laissant optionnel, nous n'avons pas à ré-ajouter notre image à chaque fois que
+
+                // nous éditons notre Article
+                'required' => false,
+                'data_class' => null,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'image/png',
+                            'image/jpeg',
+                        ],
+                        'mimeTypesMessage' => 'Veuillez ajouter une photo valide',
+                    ])
+                ],
+            ])
             ->add(
                 'dateNaissance',
                 BirthdayType::class,

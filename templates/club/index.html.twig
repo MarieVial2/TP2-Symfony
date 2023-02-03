@@ -1,39 +1,40 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Club index{% endblock %}
+{% block title %}Clubs{% endblock %}
 
 {% block body %}
-    <h1>Club index</h1>
+<div class="container m-4">
+    <div id="clubs">
+        <div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                
-                <th>Nom du club</th>
-                <th>Sport du club</th>
-                <th>Adresse du club</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for club in clubs %}
-            <tr>
-                
-                <td>{{ club.nomClub }}</td>
-                <td>{{ club.sportClub }}</td>
-                <td>{{ club.adresseClub }}</td>
-                <td>
-                    <a href="{{ path('app_club_show', {'id': club.id}) }}">show</a>
-                    <a href="{{ path('app_club_edit', {'id': club.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 
-    <a href="{{ path('app_club_new') }}">Create new</a>
+            <h2>Clubs</h2>
+            <div class="display-cards">
+
+                {% for club in clubs %}
+
+
+                <div class="card m-4" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ club.nomClub }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{club.sportClub}}</h6>
+                        <p>{{ club.adresseClub }}</p>
+                        <a href="{{ path('app_club_edit', {'id': club.id}) }}">Editer</a>
+                    </div>
+                </div>
+                {% else %}
+
+                <p>Aucun club trouvé</p>
+
+                {% endfor %}
+            </div>
+            <div class="text-center">
+                <a class="btn btn-success " href="{{ path('app_club_new') }}">Nouveau club</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
 {% endblock %}

@@ -1,26 +1,27 @@
 body {
-    margin : 0;
-    padding : 0;
+    margin: 0;
+    padding: 0;
 }
 
 nav {
-    display : flex;
-    height : 150px;
+    display: flex;
+    height: 150px;
     justify-content: space-around;
     align-items: center;
 }
 
 #logo {
-    height : 100px;
-    width : 200px;
+    height: 100px;
+    width: 200px;
     background-image: url(../images/logo.png);
     background-position: center;
     background-size: cover;
 }
 
 #navbar ul {
-    display : flex;
+    display: flex;
 }
+
 #navbar ul li a {
     text-decoration: none;
     color: black;
@@ -31,16 +32,16 @@ nav {
 
 #navbar ul li {
     list-style-type: none;
-    margin : 20px;
+    margin: 20px;
 }
 
 
 header {
-    height : 500px;
+    height: 500px;
     background-image: url(../images/header.jpeg);
     background-position: bottom 100px;
     background-size: cover;
-    display : flex;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
@@ -58,4 +59,74 @@ header h1 {
 
 h2 {
     font-family: 'Itim';
+    text-align: center
+}
+
+
+footer {
+    height: 300px;
+    background-color: rgb(54, 54, 54);
+    color: white;
+    padding: 30px
+}
+
+#logofooter {
+    height: 150px;
+    width: 300px;
+    background-image: url(../images/logofooter.png);
+    background-position: center;
+    background-size: cover;
+}
+
+footer i {
+    margin: 20px;
+    font-size: 30px;
+}
+
+/* button {
+    margin-top: 20px;
+} */
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a i {
+    margin: 5px;
+}
+
+/* Licencié--------------------------------------------------- */
+.display-cards {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#actions {
+    display: flex;
+}
+
+#licencies {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* .card-img-top {
+    width: 80%;
+} */
+
+/* EQUIPES INDEX------------------------------------------------------ */
+#equipes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* CLUBS INDEX----------------------------------------------------- */
+#clubs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
