@@ -32,6 +32,12 @@
                 <li><a href="{{ path('app_club_index') }}">Clubs</a></li>
                 <li><a href="{{ path('app_equipe_index') }}">Equipes</a></li>
                 <li><a href="{{ path('app_licencie_index') }}">Licenciés</a></li>
+                {% if not app.user %}
+                <li><a id="connexion" href="{{ path('app_login') }}">Se connecter</a></li>
+                {% endif %}
+                {% if app.user %}
+                <li><a id="deconnexion" href="{{ path('app_logout') }}">Se déconnecter</a></li>
+                {% endif %}
             </ul>
         </div>
     </nav>

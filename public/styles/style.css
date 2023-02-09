@@ -35,6 +35,10 @@ nav {
     margin: 20px;
 }
 
+nav #navbar ul li #connexion {
+    color: grey;
+}
+
 
 header {
     height: 500px;
@@ -129,4 +133,10 @@ a i {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/*  SHOWS -------------------------------*/
+.actions {
+    display: flex;
+    justify-content: center;
 }

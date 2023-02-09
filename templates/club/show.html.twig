@@ -3,32 +3,38 @@
 {% block title %}Club{% endblock %}
 
 {% block body %}
-    <h1>Club</h1>
+<div class="container m-4">
+    <h2>Club</h2>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ club.id }}</td>
-            </tr>
-            <tr>
-                <th>NomClub</th>
-                <td>{{ club.nomClub }}</td>
-            </tr>
-            <tr>
-                <th>SportClub</th>
-                <td>{{ club.sportClub }}</td>
-            </tr>
-            <tr>
-                <th>AdresseClub</th>
-                <td>{{ club.adresseClub }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div>
+        <p><b>Nom du club :</b> {{ club.nomClub }}</p>
+        <p><b>Sport du club : </b>{{ club.sportClub }}</p>
+        <p><b>Adresse du club : </b>{{ club.adresseClub }}</p>
+    </div>
 
-    <a href="{{ path('app_club_index') }}">back to list</a>
+    <div class="display-cards">
+        <!-- Faire un dump d'equipes -->
+        {{dump(equipes)}}
+        {% for equipe in equipes %}
+        <!-- On a récupéré toutes les équipes avec findAll, maintenant on met une condition pour n'afficher que les équipes dont l'id correspond au club -->
+        {% if club.id == equipe.idClub.id %}
+        <div class="card m-4" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{ equipe.nomEquipe }}</h5>
+                <a href="{{ path('app_equipe_show', {'id': equipe.id}) }}">Voir</a>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
 
-    <a href="{{ path('app_club_edit', {'id': club.id}) }}">edit</a>
+    {% if app.user %}
+    <div class="actions">
+        <a class="btn btn-primary" href="{{ path('app_club_edit', {'id': club.id}) }}">Editer</a>
 
-    {{ include('club/_delete_form.html.twig') }}
+        {{ include('club/_delete_form.html.twig') }}
+
+    </div>
+    {% endif %}
+</div>
 {% endblock %}

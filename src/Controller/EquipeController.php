@@ -6,10 +6,12 @@ use App\Entity\Equipe;
 use App\Form\EquipeType;
 use App\Repository\ClubRepository;
 use App\Repository\EquipeRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\LicencieRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/equipe')]
 class EquipeController extends AbstractController
@@ -24,7 +26,7 @@ class EquipeController extends AbstractController
 
         ]);
     }
-
+    #[IsGranted('ROLE_USER')]
     #[Route('/new', name: 'app_equipe_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EquipeRepository $equipeRepository): Response
     {
@@ -45,13 +47,15 @@ class EquipeController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_equipe_show', methods: ['GET'])]
-    public function show(Equipe $equipe): Response
+    public function show(Equipe $equipe, LicencieRepository $licencie): Response
     {
         return $this->render('equipe/show.html.twig', [
             'equipe' => $equipe,
+            // On récupère tous les licenciés à partir du repository licenciés
+            'licencies' => $licencie->findAll(),
         ]);
     }
-
+    #[IsGranted('ROLE_USER')]
     #[Route('/{id}/edit', name: 'app_equipe_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Equipe $equipe, EquipeRepository $equipeRepository): Response
     {
@@ -69,7 +73,7 @@ class EquipeController extends AbstractController
             'form' => $form,
         ]);
     }
-
+    #[IsGranted('ROLE_USER')]
     #[Route('/{id}', name: 'app_equipe_delete', methods: ['POST'])]
     public function delete(Request $request, Equipe $equipe, EquipeRepository $equipeRepository): Response
     {

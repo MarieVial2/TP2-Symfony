@@ -4,25 +4,35 @@
 
 {% block body %}
 <div class="container m-4">
-    <h2>Equipe</h2>
+    <h2>Equipe {{ equipe.nomEquipe }}</h2>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ equipe.id }}</td>
-            </tr>
-            <tr>
-                <th>NomEquipe</th>
-                <td>{{ equipe.nomEquipe }}</td>
-            </tr>
-        </tbody>
-    </table>
 
-    <a href="{{ path('app_equipe_index') }}">back to list</a>
+    <div class="display-cards">
 
-    <a href="{{ path('app_equipe_edit', {'id': equipe.id}) }}">edit</a>
+        {% for licencie in licencies %}
+        <!-- On a récupéré toutes les équipes avec findAll, maintenant on met une condition pour n'afficher que les équipes dont l'id correspond au club -->
+        {% if equipe.id == licencie.idEquipe.id %}
+        <div class="card m-4" style="width: 18rem;">
 
-    {{ include('equipe/_delete_form.html.twig') }}
+            <img src="{{ asset('uploads/images/' ~ licencie.photoLicencie) }}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ licencie.nomLicencie }} {{ licencie.prenomLicencie }}</h5>
+                <p class="card-text">Né(e) le {{ licencie.dateNaissance ? licencie.dateNaissance|date('d-m-Y') : ''
+                    }}</p>
+                <p class="card-text"> {{ licencie.idEquipe.nomEquipe }}</p>
+                <a href="{{ path('app_licencie_show', {'id': licencie.id}) }}">Voir</a>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+
+    {% if app.user %}
+    <div class="actions">
+        <a class="btn btn-info" href="{{ path('app_equipe_edit', {'id': equipe.id}) }}">Editer</a>
+
+        {{ include('equipe/_delete_form.html.twig') }}
+    </div>
+    {% endif %}
 </div>
 {% endblock %}

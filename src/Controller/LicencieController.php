@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\File\File;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
@@ -24,7 +25,7 @@ class LicencieController extends AbstractController
             'licencies' => $licencieRepository->findAll(),
         ]);
     }
-
+    #[IsGranted('ROLE_USER')]
     #[Route('/new', name: 'app_licencie_new', methods: ['GET', 'POST'])]
     public function new(Request $request, LicencieRepository $licencieRepository, SluggerInterface $slugger): Response
     {
@@ -70,7 +71,7 @@ class LicencieController extends AbstractController
             'licencie' => $licencie,
         ]);
     }
-
+    #[IsGranted('ROLE_USER')]
     #[Route('/{id}/edit', name: 'app_licencie_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Licencie $licencie, LicencieRepository $licencieRepository, SluggerInterface $slugger): Response
     {
@@ -114,7 +115,7 @@ class LicencieController extends AbstractController
             'form' => $form,
         ]);
     }
-
+    #[IsGranted('ROLE_USER')]
     #[Route('/{id}', name: 'app_licencie_delete', methods: ['POST'])]
     public function delete(Request $request, Licencie $licencie, LicencieRepository $licencieRepository): Response
     {

@@ -19,7 +19,10 @@
                         <h5 class="card-title">{{ club.nomClub }}</h5>
                         <h6 class="card-subtitle mb-2 text-muted">{{club.sportClub}}</h6>
                         <p>{{ club.adresseClub }}</p>
+                        {% if app.user %}
                         <a href="{{ path('app_club_edit', {'id': club.id}) }}">Editer</a>
+                        {% endif %}
+                        <a href="{{ path('app_club_show', {'id': club.id}) }}">Voir</a>
                     </div>
                 </div>
                 {% else %}
@@ -28,9 +31,12 @@
 
                 {% endfor %}
             </div>
+
+            {% if app.user %}
             <div class="text-center">
                 <a class="btn btn-success " href="{{ path('app_club_new') }}">Nouveau club</a>
             </div>
+            {% endif %}
         </div>
 
     </div>
